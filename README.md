@@ -7,8 +7,8 @@
 3. 발표자는 정해진 분량을 정리하여 md 파일로 업로드 및 링크 연결 하기
     - Chapter02.md 와 같이 업로드 (숫자는 두자리 수로)
     - README.md에 링크 연결
-4. Commit Convention
-    - md 파일 : [Add] 📝 Chapter.02
+4. Commit Messages
+    - md 파일 : [Add] 📝 Chapter.02 객체 생성과 파괴
     - README : [Update] ✍️ REAEMD.md
 
 ## 👩‍💻 Schedule
