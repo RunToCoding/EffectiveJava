@@ -36,19 +36,19 @@ private final Collection<Stamp> stamps = ...;   //매개변수화된 컬렉션 �
 
 ```java
 public static void main(String[] args) {
-		List<String> strings = new ArrayList<>();
-		unsafeAdd(strings, Integer.valueOf(42));
-		String s = strings.get(0);  // 1의 경우 Integer를 String으로 형변환 시도하여 오류
+	List<String> strings = new ArrayList<>();
+	unsafeAdd(strings, Integer.valueOf(42));
+	String s = strings.get(0);  // 1의 경우 Integer를 String으로 형변환 시도하여 오류
 }
 
 // 1
-private static void unsafeAdd(**List** list, Object o) {
-		list.add(o);
+private static void unsafeAdd(List list, Object o) {
+	list.add(o);
 }
 
 // 2 - 컴파일 오류
-private static void unsafeAdd(**List<Object>** list, Object o) {
-		list.add(o);
+private static void unsafeAdd(List<Object> list, Object o) {
+	list.add(o);
 }
 ```
 
@@ -69,9 +69,9 @@ e.g. `Set<E>`의 비한정적 와일드 카드 타입: `Set<?>`
         비한정적 와일드카드 타입은 사용 가능하나, 로 타입과 똑같이 동작하므로 로 타입 사용이 깔끔함
         
         ```java
-        if (o instanceof **Set**) {
-        		**Set<?>** s = **(Set<?>)** o;
-        		...
+        if (o instanceof ****Set) {
+        	Set<?> s = (Set<?>) o;
+        	...
         }
         ```
         
@@ -93,8 +93,8 @@ e.g. `Set<E>`의 비한정적 와일드 카드 타입: `Set<?>`
     
     ```java
     Venery.java:4: warning: [unchecked] unchecked conversion
-    				Set<Lark> exaltation = new HashSet();
-                                   ^
+    	Set<Lark> exaltation = new HashSet();
+    													^
     	required: Set<Lark>
     	found:    HashSet
     ```
@@ -150,52 +150,52 @@ e.g. `Set<E>`의 비한정적 와일드 카드 타입: `Set<?>`
     ```java
     // 1. 제네릭을 쓰지 않고 구현
     public class Chooser {
-    		private final Object[] choiceArray;
+    	private final Object[] choiceArray;
     		
-    		public Chooser(Collection choices) {  // 타입이 다른 원소가 들어 있었다면
-    				choiceArray = choices.toArray();
-    		}
+    	public Chooser(Collection choices) {  // 타입이 다른 원소가 들어 있었다면
+    			choiceArray = choices.toArray();
+    	}
     
-    		public Object choose() {  // 반환된 Object를 형변환할 때 오류 발생
-    				Random rnd = ThreadLocalRandom.current();
-    				return choiceArray[rnd.nextInt(choiceArray.length)];
-    		}
+    	public Object choose() {  // 반환된 Object를 형변환할 때 오류 발생
+    			Random rnd = ThreadLocalRandom.current();
+    			return choiceArray[rnd.nextInt(choiceArray.length)];
+    	}
     }
     
     // 2-1. 제네릭 적용
-    public class Chooser**<T>** {
-    		private final **T**[] choiceArray;
-    		
-    		public Chooser(Collection**<T>** choices) {
-    				choiceArray = choices.toArray();   // T[] = Object[] => 컴파일 오류
-    		}
+    public class Chooser<T> {
+    	private final T[] choiceArray;
+    	
+    	public Chooser(Collection<T> choices) {
+    		choiceArray = choices.toArray();   // T[] = Object[] => 컴파일 오류
+    	}
     
-    		...
+    	...
     }
     
     // 2-2. 제네릭 적용 - 오류 수정
-    public class Chooser**<T>** {
-    		private final **T**[] choiceArray;
-    		
-    		public Chooser(Collection**<T>** choices) {
-    				choiceArray = **(T[])** choices.toArray();   // 형변환 
-    		}   // => T가 무슨 타입인지 알 수 없어 안전을 보장할 수 없다는 경고
+    public class Chooser<T> {
+    	private final T[] choiceArray;
+    	
+    	public Chooser(Collection<T> choices) {
+    		choiceArray = (T[]) choices.toArray();   // 형변환 
+    	}   // => T가 무슨 타입인지 알 수 없어 안전을 보장할 수 없다는 경고
     
-    		...
+    	...
     }
     
     // 3. 리스트 기반 - 타입 안전성 확보
-    public class Chooser**<T>** {
-    		private final **List<T>** choiceList;
-    		
-    		public Chooser(Collection**<T>** choices) {
-    				choiceArray = **new ArrayList<>(choices)**;
-    		}
+    public class Chooser<T> {
+    	private final List<T> choiceList;
+    	
+    	public Chooser(Collection<T> choices) {
+    		choiceArray = new ArrayList<>(choices);
+    	}
     
-    		public T choose() {
-    				Random rnd = ThreadLocalRandom.current();
-    				return **choiceList.get(rnd.nextInt(choiceList.size()))**;
-    		}
+    	public T choose() {
+    		Random rnd = ThreadLocalRandom.current();
+    		return choiceList.get(rnd.nextInt(choiceList.size()));
+    	}
     }
     ```
     
@@ -207,28 +207,28 @@ e.g. `Set<E>`의 비한정적 와일드 카드 타입: `Set<?>`
 ```java
 // Object 기반 스택
 public class Stack {
-    private Object[] elements;
-    private int size = 0;
-    private static final int DEFAULT_INITIAL_CAPACITY = 16;
-    
-    public Stack() {
-        elements = new Object[DEFAULT_INITIAL_CAPACITY];
-    }
-    
-    public void push(Object e) {
-        ensureCapacity();
-        elements[size++] = e;
-    }
-    
-    public Object pop() {
-        if (size == 0) throw new EmptyStackException();
-				Object result = elements[--size];
-				elements[size] = null;
-        return result;
-    }
-    
-    public boolean isEmpty() {...}
-	  private void ensureCapacity() {...}
+  private Object[] elements;
+  private int size = 0;
+  private static final int DEFAULT_INITIAL_CAPACITY = 16;
+  
+  public Stack() {
+    elements = new Object[DEFAULT_INITIAL_CAPACITY];
+  }
+  
+  public void push(Object e) {
+    ensureCapacity();
+    elements[size++] = e;
+  }
+  
+  public Object pop() {
+    if (size == 0) throw new EmptyStackException();
+		Object result = elements[--size];
+		elements[size] = null;
+    return result;
+  }
+  
+  public boolean isEmpty() {...}
+  private void ensureCapacity() {...}
 }
 ```
 
@@ -236,54 +236,54 @@ public class Stack {
 
 ```java
 // 제네릭 스택으로 가는 첫 단계 - 컴파일되지 않는다.
-public class Stack**<E>** {
-    private **E**[] elements;
-    private int size = 0;
-    private static final int DEFAULT_INITIAL_CAPACITY = 16;
-    
-    public Stack() {
-        elements = new **E**[DEFAULT_INITIAL_CAPACITY];  
-    }   // E와 같은 실체화 불가 타입으로는 배열을 만들 수 없음 (아이템 28)
-    
-    public void push(**E** e) {
-        ensureCapacity();
-        elements[size++] = e;
-    }
-    
-    public **E** pop() {
-        if (size == 0) throw new EmptyStackException();
-				**E** result = elements[--size];
-				elements[size] = null;
-        return result;
-    }
-    
-    public boolean isEmpty() {...}
-	  private void ensureCapacity() {...}
+public class Stack<E> {
+  private E[] elements;
+  private int size = 0;
+  private static final int DEFAULT_INITIAL_CAPACITY = 16;
+  
+  public Stack() {
+    elements = new E[DEFAULT_INITIAL_CAPACITY];  
+  }   // E와 같은 실체화 불가 타입으로는 배열을 만들 수 없음 (아이템 28)
+  
+  public void push(E e) {
+    ensureCapacity();
+    elements[size++] = e;
+  }
+  
+  public E pop() {
+    if (size == 0) throw new EmptyStackException();
+		E result = elements[--size];
+		elements[size] = null;
+    return result;
+  }
+  
+  public boolean isEmpty() {...}
+  private void ensureCapacity() {...}
 }
 ```
 
 ```java
 // 방법 1-1 - 비검사 형변환 경고 발생
-elements = **(E[])** new Object[DEFAULT_INITIAL_CAPACITY];
+elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
 
 // 방법 1-2
-**@SuppressWarnings("unchecked")**
+@SuppressWarnings("unchecked")
 public Stack() {
-		elements = **(E[])** new Object[DEFAULT_INITIAL_CAPACITY];
+	elements = (E[]) new Object[DEFAULT_INITIAL_CAPACITY];
 }
 
-// 방법 2-1 - **E** result = elements[--size]; 에서 형변환 오류
-private **Object[]** elements;
+// 방법 2-1 - E result = elements[--size]; 에서 형변환 오류
+private Object[] elements;
 
 // 방법 2-2 - 비검사 형변환 경고 발생
-**E** result = **(E)** elements[--size];
+E result = (E) elements[--size];
 
 // 방법 2-3
-public **E** pop() {
-        if (size == 0) throw new EmptyStackException();
-				**@SuppressWarnings("unchecked") E** result = elements[--size];
-				elements[size] = null;
-        return result;
+public E pop() {
+  if (size == 0) throw new EmptyStackException();
+	@SuppressWarnings("unchecked") E result = elements[--size];
+	elements[size] = null;
+  return result;
 }
 ```
 
