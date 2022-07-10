@@ -15,34 +15,16 @@
 
 ## 👩‍💻 Schedule
 
-|Date| Chapter                                                          |Presenter|
-|:---:|:-----------------------------------------------------------------|:---:|
-|2022.06.27| [Chapter.02 객체 생성과 파괴](./Chapter02.md)                         |`김수빈`|
-|2022.06.27| [Chapter.03 모든 객체의 공통 메서드](./Chapter03.md)                    |`김세진`|
-|2022.07.04 - 11| Chapter.04 클래스와 인터페이스                                     |`최지윤`|
-|2022.07.04| Chapter.05 제네릭 [(1)](./Chapter05(1).md) [(2)](./Chapter05(2).md) |`김수빈`, `서예지`|
-|2022.07.11| Chapter.06 열거 타입과 애너테이션 [(1)](./Chapter06(1).md)             |`김수빈`, `서예지`|
-|2022.07.18| Chapter.07 람다와 스트림                                              |`김수빈`, `서예지`|
-|2022.07.25| Chapter.08 메서드                                                   |`서예지`, `최지윤`|
-|2022.08.01| Chapter.09 일반적인 프로그래밍 원칙                                      |`김수빈`, `최지윤`|
-|2022.08.08| Chapter.10 예외                                                     |`김수빈`, `서예지`|
-|2022.08.15| Chapter.11 동시성                                                    |`서예지`, `최지윤`|
-|2022.08.22| Chapter.12 직렬화                                                    |`김수빈`, `서예지`|
-
-## 😎 Contributer
-
-<a href = "https://github.com/Kim-SuBin">
-  <img src="https://avatars.githubusercontent.com/u/46712693?s=400&u=fbd9c6ca52af3c7505d69cfaa47e829c443c980a&v=4" alt="subin" width="80" style="max-width:100%" />
-</a>
-<a href = "https://github.com/Juyoung4">
-  <img src="https://avatars.githubusercontent.com/u/47167335?s=400&u=e1c1bb39470956b96c192da2cff48b480780e51a&v=4" alt="juyoung" width="80" style="max-width:100%" />
-</a>
-<a href = "https://github.com/sejin-k">
-  <img src="https://avatars.githubusercontent.com/u/48510236?v=4" alt="sejin" width="80" style="max-width:100%" />
-</a>
-<a href = "https://github.com/chlwldbs8136">
-  <img src="https://avatars.githubusercontent.com/u/82267227?v=4" alt="juyun" width="80" style="max-width:100%" />
-</a>
-<a href = "https://github.com/suhyeji">
-  <img src="https://avatars.githubusercontent.com/u/65303837?v=4" alt="yeji" width="80" style="max-width:100%" />
-</a>
+|      Date       | Chapter                                                                                       |  Presenter   |
+|:---------------:|:----------------------------------------------------------------------------------------------|:------------:|
+|   2022.06.27    | [Chapter.02 객체 생성과 파괴](./Chapter02.md)                                                        |    `김수빈`     |
+|   2022.06.27    | [Chapter.03 모든 객체의 공통 메서드](./Chapter03.md)                                                    |    `김세진`     |
+| 2022.07.04 - 11 | Chapter.04 클래스와 인터페이스                                                                         |    `최지윤`     |
+|   2022.07.04    | Chapter.05 제네릭 [(아이템 26 - 29)](./Chapter05(1).md) [(아이템 30 - 33)](./Chapter05(2).md)          | `김수빈`, `서예지` |
+|   2022.07.11    | Chapter.06 열거 타입과 애너테이션 [(아이템 34 - 37)](./Chapter06(1).md) [(아이템 38 - 41)](./Chapter06(2).md) | `김수빈`, `서예지` |
+|   2022.07.18    | Chapter.07 람다와 스트림                                                                            | `김수빈`, `서예지` |
+|   2022.07.25    | Chapter.08 메서드                                                                                | `서예지`, `최지윤` |
+|   2022.08.01    | Chapter.09 일반적인 프로그래밍 원칙                                                                      | `김수빈`, `최지윤` |
+|   2022.08.08    | Chapter.10 예외                                                                                 | `김수빈`, `서예지` |
+|   2022.08.15    | Chapter.11 동시성                                                                                | `서예지`, `최지윤` |
+|   2022.08.22    | Chapter.12 직렬화                                                                                | `김수빈`, `서예지` |
