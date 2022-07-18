@@ -4,7 +4,7 @@
 
 ### 스트림 패러다임의 핵심
 - 계산을 일련의 변환(transformation)으로 재구성하는 부분
-- 이 때, 각 변환 단계는 가능한 이전 다녜의 결과를 받아 처리하는 순수 함수여야 한다.
+- 이 때, 각 변환 단계는 가능한 이전 단계의 결과를 받아 처리하는 순수 함수여야 한다.
   > 순수 함수란? <br/>
   > - 오직 입력만이 결과에 영향을 주는 함수 <br/>
   > - 다른 가변 상태를 참조하지 않고, 함수 스스로도 다른 상태를 변경하지 않는다.
@@ -33,7 +33,7 @@ try (Stream<String> words = ne Scanner(file).tokens()) {
 
 ### java.util.stream.Collectors 클래스
 > 무려 39개의 메서드를 가지고 있으며, 그중에는 타입 매개변수가 5개나 되는 것도 있다.
-#### toList(), toSect(), toCollections(collectionFactory)
+#### toList(), toSet(), toCollections(collectionFactory)
 - 스트림의 원소를 손쉽게 컬렉션으로 모을 수 있다.
 - 차례대로 리스트, 집합, 프로그래머가 지정한 컬렉션 타입을 반환한다.
 ```java
@@ -67,7 +67,7 @@ Collectors의 멤버를 정적 임포트하여 쓰면 스트림 파이프라인 
   toMap(keyMapper, valueMapper, (oldVal, newVal) -> newVal);
   ```
 
-#### groupBy
+#### groupingBy
 - 입력 : 분류 함수 (입력받은 원소가 속하는 카테고리를 반환하는 함수)
 - 출력 : 원소들을 카테고리별로 모아 놓은 맵
 - 대표적인 예 : 아나그램 프로그램 (아이템 45) <br/>
@@ -75,11 +75,11 @@ Collectors의 멤버를 정적 임포트하여 쓰면 스트림 파이프라인 
   ```java
   words.collect(groupingBy(word -> alphabetize(word)))
   ```
-- groupBy 리스트 외의 값을 갖는 맵을 생성하게 할 때, 분류 함수와 함께 다운스트림 수집기도 명시해야 한다.
+- groupingBy 리스트 외의 값을 갖는 맵을 생성하게 할 때, 분류 함수와 함께 다운스트림 수집기도 명시해야 한다.
 
 ##### 다운스트림(downstream) 수집기
-- 해당 카테고리의 모든 우너소를 담은 스트림으로부터 값을 생성한다.
-- to Set()
+- 해당 카테고리의 모든 원소를 담은 스트림으로부터 값을 생성한다.
+- toSet()
   - 가장 간단한 방법
   - 집합(Set)을 갖는 맵을 만들어낸다.
 - toCollection(collectionFactory)
@@ -112,7 +112,7 @@ Collectors의 멤버를 정적 임포트하여 쓰면 스트림 파이프라인 
 - 인수 하나짜리 joining은 CharSequence 타입의 구분문자를 매개변수로 받는다.
 - 인수 3개짜리 joining은 구분문자에 더해 접두문자와 접미문자도 받는다.
 
-## 아이템 47. 반환 타입으로는 스트림보다 컬렉션이 낮다
+## 아이템 47. 반환 타입으로는 스트림보다 컬렉션이 
 ### 스트림은 반복(iteration)을 지원하지 않는다.
 사실 Stream 인터페이스는 Iterable 인터페이스가 정의한 추상 메서드를 전부 포함할 뿐만 아니라, Iterable 인터페이스가 정의한 방식대로 동작한다. <br/>
 그럼에도 for-each로 스트림을 반복할 수 없는 까닭은 `Stream이 Iterable을 확장하지 않아서`다. <br/>
