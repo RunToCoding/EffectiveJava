@@ -102,6 +102,7 @@
         - **람다**의 `this`는 **바깥 인스턴스**, **익명 클래스**의 `this`는 익명 클래스의 **인스턴스 자신**
         
 <br>
+
 ## *아이템 43*. 람다보다는 메서드 참조를 사용하라 (p259)
 
 ### 메서드 참조(method reference)
@@ -147,16 +148,18 @@
     3. **비한정적(unbound) 인스턴스 참조**: 수신 객체를 특정하지 않음
     4. **클래스 생성자**를 가리키는 메서드 참조
     5. **배열 생성자**를 가리키는 메서드 참조
+
     <br>
+    
     | 메서드 참조 유형 | 예 | 같은 기능을 하는 람다 |
     | --- | --- | --- |
     | 정적 | Integer::parseInt | str -> Integer.parseInt(str) |
-    | 한정적(인스턴스) | Instant.now()::isAfter | Instant then = Instant.now();
-    t → then.isAfter(t) |
+    | 한정적(인스턴스) | Instant.now()::isAfter | Instant then = Instant.now(); t → then.isAfter(t) |
     | 비한정적(인스턴스) | String::toLowerCase | str -> str.toLowerCase() |
     | 클래스 생성자 | TreeMap<K,V>::new | () -> new TreeMap<K,V>() |
     | 배열 생성자 | int[]::new | len -> new int[len] |
 <br>
+
 ## *아이템 44*. 표준 함수형 인터페이스를 사용하라 (p263)
 
 - **상위 클래스의 기본 메서드를 재정의**해 원하는 동작을 구현하는 템플릿 메서드 패턴 
@@ -185,19 +188,22 @@
          
         
 <br>
+
 ### 기본 함수형 인터페이스
 
 | 인터페이스 | 함수 시그니처 | 예 |
 | --- | --- | --- |
 | UnaryOperator<T> | T apply(T t) | String::toLowerCase |
-| BinaryOperator<T> | T apply T t1, T t2) | BigInteger::add |
+| BinaryOperator<T> | T apply(T t1, T t2) | BigInteger::add |
 | Predicate<T> | boolean test(T t) | Collection::isEmpty |
 | Function<T,R> | R apply(T t) | Arrays::asList |
 | Supplier<T> | T get() | Instant::now |
 | Consumer<T> | void accept(T t) | System.out::print |
 
 ⇒ 변형은 p265 참고!
-<br>
+    
+
+
 - 표준 함수형 인터페이스를 사용하지 않고 **직접 작성**해야 하는 경우?
     1. 필요한 용도에 맞는 게 없는 경우
     2. 같은 구조가 있더라도 다음과 같은 경우
@@ -212,9 +218,10 @@
     
 - ※ 함수형 인터페이스를 API에서 사용할 때 서로 **다른 함수형 인터페이스**를 **같은 위치의 인수**로 받는 메서드들을 **다중 정의**해서는 안 됨
 
+<br>
 
 ## *아이템 45*. 스트림은 주의해서 사용하라 (p268)
-## 아이템 45. 스트림은 주의해서 사용하라 (p268)
+    
 ### 스트림 API
 
 - **다량의 데이터 처리** 작업을 돕고자 추가됨
