@@ -62,6 +62,24 @@
 - 관련 데이터를 모두 담아야 하지만 장황할 필ㅇ는 없다.
 - 예외의 상세 메시지와 최종 사용자에게 보여줄 오류 메시지를 혼동해서는 안된다.
 - 실패를 적절히 포착하려면 필요한 정보를 예외 생성자에서 모두 받아서 상세 메시지까지 미리 생성해놓는 방법도 괜찮다.
+  ```java
+  /**
+  * IndexOutOfBoundsException을 생성한다.
+  * 
+  * @param lowerBound 인덱스 최솟값
+  * @param upperBound 인덱스 최댓값 + 1
+  * @param index 인덱스 실젯값
+  */
+  pubilc IndexOfBoundsException(int lowerBound, int upperBound, int index) {
+    // 실패를 포착하는 상세 메시지를 생성한다.
+    super(String.format("최솟값: %d, 최댓값: %d, 인덱스: %d", lowerBound, upperBound, index));
+  
+    // 프로그램에서 이용할 수 있도록 실패 정보를 저장해둔다.
+    this.lowerBound = lowerBound;
+    this.upperBound = upperBound;
+    this.index = index;
+  }
+  ```
 - 포착한 실패 정보는 예외 상황을 복구하는 데 유용할 수 있으므로 접근자 메서드는 비검사 예외보다는 검사 예외에서 더 빛을 발한다.
 - 비검사 예외라도 상세 정보를 알려주는 접근자 메서드를 제공하는 것을 권한다.
 
