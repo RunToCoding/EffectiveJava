@@ -96,7 +96,7 @@ for(int i = 0; i < a.length; i++) {
 
 이러한 문제들은 for-each문을 사용하면 다 해결된다.
 
----
+--- 
 
 - for-each문의 정식 이름은 ‘향상된 for문 ( enhanced for statement )’이다.
 - 반복자와 인덱스 변수를 사용하지 않으므로 코드가 깔끔해지고 오류가 날 일이 없다.
