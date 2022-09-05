@@ -46,6 +46,13 @@ private static class SerializationProxy implements Serializable {
     
     private static final long serialVersionUID = 234089894760437; // 아무 값이나 상관없다.
     
+    // Period.SerializationProxy 용 readResolve 메서드
+    private Object readResolve() {
+        return new Period(start, end);
+    }
+}
+
+Proxy {
     // 직렬화 프록시 패턴용 wirteReplace
     private Object wirteReplace() {
         return new SerializationProxy(this);
@@ -54,11 +61,6 @@ private static class SerializationProxy implements Serializable {
     // 불변식을 훼손하려는 공격을 막기 위한 직렬화 프록시 패턴용 readObject 메서드
     private void readObject(ObjectInputStream stream) throws InvalidObjectException {
         throw new InvalidObjectException("프록시가 필요합니다.");
-    }
-    
-    // Period.SerializationProxy 용 readResolve 메서드
-    private Object readResolve() {
-        return new Period(start, end);
     }
 }
 ```
